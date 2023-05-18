@@ -1,1 +1,1 @@
-# Modelación de la propagación del COVID-19 en la ZMVM
+# Modelo matemático de la propagación del COVID-19 en la ZMVM
