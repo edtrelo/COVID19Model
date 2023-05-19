@@ -1,7 +1,8 @@
 import pandas as pd
 import pickle
 
-cvesdf = pd.read_csv("https://raw.githubusercontent.com/edtrelo/COVID19Model/main/data/transformeddata/cves_miZMVM.csv")
+cvesdf = pd.read_csv("https://raw.githubusercontent.com/edtrelo/COVID19Model/main/data/transformeddata/cves_miZMVM.csv",
+dtype = {'cve_umun':str})
 cves = cvesdf['cve_umun'].to_list()
 
 # ------------------------- CASOS CONFIRMADOS -------------------------------------------------------------- #
