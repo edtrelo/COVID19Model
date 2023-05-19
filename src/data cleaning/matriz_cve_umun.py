@@ -88,3 +88,6 @@ matriz_cves_sabado = distritos_a_mun(matriz_sabado)
 #matriz_cves_sabado.to_csv('data/cleandata/viajes/viajes_sabado_por_cve_umun_2017.csv', 
 #                                sep = ',', encoding =  'utf-8')
 
+df = {'cve_umun': matriz_cves_entre_semana.index}
+df = pd.DataFrame(df)
+df.to_csv("data/transformeddata/cves_miZMVM.csv", index=False)
