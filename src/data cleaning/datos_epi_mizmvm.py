@@ -1,8 +1,9 @@
 import pandas as pd
 import pickle
 
-with open('data/cleandata/ZMVM/miZMVM_cves.pkl', 'rb') as file:
-    cves = pickle.load(file)
+cvesdf = pd.read_csv("https://raw.githubusercontent.com/edtrelo/COVID19Model/main/data/transformeddata/cves_miZMVM.csv")
+cves = cvesdf['cve_umun'].to_list()
+
 # ------------------------- CASOS CONFIRMADOS -------------------------------------------------------------- #
 # leemos los casos confirmados a nivel nacional
 casosdiarios = pd.read_csv("data/rawdata/Casos_Diarios_Municipio_Confirmados_20230226.csv", encoding = 'utf-8', 
