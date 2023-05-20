@@ -1,5 +1,4 @@
 import pandas as pd
-import pickle as pkl
 
 # casos de defunciones a los que vamos a ajustar las soluciones 
 fp_viajes = ["data/cleandata/viajes/viajes_entre_semana_por_cve_umun_2020.csv",
