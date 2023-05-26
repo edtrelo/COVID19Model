@@ -19,7 +19,6 @@ def viajes_regiones(fp):
     viajes = pd.read_csv(fp, sep = ',', encoding = 'utf-8', 
                          dtype={'origen': str})
     viajes['region'] = viajes.origen.apply(asignar_region)
-    print(viajes)
     # agrupamos por región y sumamos
     viajes = viajes.groupby("region").sum(numeric_only=True)
     # obtenemos un diccionarios con nombre:región
