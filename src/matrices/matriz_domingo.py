@@ -11,14 +11,13 @@ matriz_dom = matriz_sab.copy()
 
 # obtenemos el ajuste que realizamos para los logaritmos de los cociente en la variabilidad sábado/domingo
 ajuste = pd.read_csv("https://raw.githubusercontent.com/edtrelo/COVID19Model/main/data/transformeddata/var_movilidad_sabdom_ajuste.csv")
-df, loc, scale = ajuste.iloc[:, 1]
+coef, inter = 0.61363027, 444.00779341
 
 n = len(matriz_dom)
 # multiplicamos las entradas de la matriz de sábado por el parámetro de proporcionalidad
-beta = np.exp(scale*(np.random.standard_t(df, size = (n, n))) + loc)
 for i in range(n):
     for j in range(n):
-        matriz_dom.iloc[i, j] *= beta[i, j] 
+        matriz_dom.iloc[i, j] = coef*matriz_sab.iloc[i, j] + inter 
 # aplicamos la función piso
 myfloor = lambda x: np.floor(x).astype(int) # hay unas entradas que son negativas, pero cerca del cero.
 matriz_dom = matriz_dom.apply(myfloor)
