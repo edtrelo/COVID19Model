@@ -46,7 +46,9 @@ function Model(dXdt, X, p, t)
     Ia(i) = X[8*(i-1) + 7]
     Im(i) = X[8*(i-1) + 8]
     
-    N(i) = pob[i] - X[8*(i-1) + 6]
+    red_traf = p
+
+    N(i) = pob[i] - D(i)
     γ(i) = N(i) / pob[i]
     
     function Ω(i, j, d)
@@ -119,15 +121,18 @@ for i in 1:5
     end
 end
 
-p = []
+reds = [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]
+solsR = []
+
+
+for r in reds
+    tspan = (0.0, 94.0)
+    prob = ODEProblem(Model, x0, tspan, r)
+    sol = solve(prob, saveat = 0:94)
+    append!(solsR, sol)
+end
 
 # solución del caso base
-tspan = (0.0, 94.0)
-prob = ODEProblem(Model, x0, tspan)
-sol = solve(prob, saveat = 0:94)
 
-plot(sol[8*(4-1) + 1, :])
-
-using DelimitedFiles
-
-writedlm( "D:/Edgar Trejo/Universidad/Proyecto/COVID19Model/data/results/casobase.csv",  sol, ',')
+@show solsR[1]
+plot(solsR[1][1, :])
