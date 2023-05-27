@@ -46,33 +46,17 @@ function Model(dXdt, X, p, t)
     Ia(i) = X[8*(i-1) + 7]
     Im(i) = X[8*(i-1) + 8]
     
-    N(i) = pob[i] - X[8*(i-1) + 6]
-    γ(i) = N(i) / pob[i]
-    
     function Ω(i, j, d)
 
         wd = (dayofweek(fecha_inicio) + d )-1  % 7
         if wd == 5
-            if i == j
-                p = (N(i) - γ(i)*(sum(viajes[2][i, 1:end]) - viajes[2][i, i])) / N(i)
-            else
-                p = γ(i)*viajes[2][i, j] / N(i)
-            end
-
+            p = viajes[2][i, j] / pob[i]
 
         elseif wd == 6
-            if i == j
-                p = (N(i) - γ(i)*(sum(viajes[3][i, 1:end]) - viajes[3][i, i])) / N(i)
-            else
-                p = γ(i)*viajes[3][i, j] / N(i)
-            end
+            p = viajes[3][i, j] / pob[i]
 
         else
-            if i == j
-                p = (N(i) - γ(i)*(sum(viajes[1][i, 1:end]) - viajes[1][i, i])) / N(i)
-            else
-                p = γ(i)*viajes[1][i, j] / N(i) / N(i)
-            end
+            p = viajes[1][i, j] / pob[i]
         end
 
         if d > inicio_red
